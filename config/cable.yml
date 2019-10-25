@@ -1,11 +1,13 @@
 # Action Cable uses Redis by default to administer connections, channels, and sending/receiving messages over the WebSocket.
-production:
-  adapter: redis
-  url: <%= ENV['REDIS_URL'] %>
-
 development:
   adapter: redis
-  url: redis://localhost:6379/2
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: rails-tic-tutorial_development
 
 test:
   adapter: async
+
+production:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: rails-tic-tutorial_production

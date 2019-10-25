@@ -1,19 +1,17 @@
 default: &default
   adapter: postgresql
+  pool: 5 # Specifies the maximum number of connections that can be opened
+  timeout: 5000 # in milliseconds. This is how long the app will wait for a database response
   encoding: unicode
-  username: postgres
-  password: 12345Postgres
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 5
 
 development:
-  <<: *default
-  database: tic-tac-toe-app_development
+  <<: *default # inherits from default
+  database: myapp_development
 
 test:
   <<: *default
-  database: tic-tac-toe-app_test
+  database: myapp_test
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  database: myapp
